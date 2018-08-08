@@ -1,3 +1,23 @@
-body {
-  background: blue;
+body{
+   background-color: aqua;
+}
+
+h1{
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+.teachers {
+     min-width: 200px;
+     min-height: 200px;
+    background-color: brown;
+}
+
+.learners {
+    min-width: 200px;
+    min-height: 200px;
+   background-color: lightgrey;
 }
