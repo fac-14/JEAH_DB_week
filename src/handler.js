@@ -8,15 +8,25 @@ const mimeTypes = {
 }
 
 const buildPath = (file) => {
-  path.join(__dirname,'..','public', file);
+  return path.join(__dirname,'..','public', file);
 }
 
 const indexHandler = (req, res) => {
-  const fileName = req.url.split("/public/")[1];
-  const extension = () => {
-    fileName.split(".")[1];
-  }
-  fs.readFile(buildPath(fileName),(err,file) => {
+  fs.readFile(buildPath('index.html'),(err,file) => {
+    if (err) {
+      res.writeHead(500,{ 'Content-Type' : 'text/html' });
+      res.end('Sorry, we could not retrieve the web page');
+      console.log(err);
+    } else {
+      res.writeHead(200, { 'Content-Type' : 'text/html' });
+      res.end(file);
+    }
+  })
+}
+
+const publicHandler = (req, res) => {
+  const extension = req.url.split(".")[1];
+  fs.readFile(buildPath(req.url),(err,file) => {
     if (err) {
       res.writeHead(500,{ 'Content-Type' : 'text/html' });
       res.end('Sorry, we could not retrieve the web page');
@@ -29,7 +39,4 @@ const indexHandler = (req, res) => {
 }
 
 
-
-
-
-module.exports = { indexHandler };
+module.exports = { indexHandler, publicHandler };
