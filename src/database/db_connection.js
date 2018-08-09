@@ -2,11 +2,11 @@ const { Pool } = require('pg');
 const url = require('url');
 require('env2')('./config.env');
 
-let DB_URL = process.env.LOCAL_DB_URL;
+let DB_URL = process.env.SKILLSHARE_DB_URL;
 if (process.env.NODE_ENV === "test") {
   DB_URL = process.env.TEST_DB_URL;
-} else if (process.env.NODE_ENV === "heroku") {
-  DB_URL = process.env.SKILLSHARE_DB_URL;
+} else if (process.env.NODE_ENV === "local") {
+  DB_URL = process.env.LOCAL_DB_URL;
 }
 
 if (!DB_URL) throw new Error("Enviroment variable DB_URL must be set");

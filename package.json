@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "dev": "NODE_ENV=local nodemon src/server.js",
     "test": "NODE_ENV=test nyc tape ./tests/*.js | tap-spec",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
