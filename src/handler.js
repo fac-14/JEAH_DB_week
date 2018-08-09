@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const dbconnection = require('./database/db_connection'); // this is the pool
 
 const mimeTypes = {
   html: "text/html",
@@ -39,8 +40,14 @@ const publicHandler = (req, res) => {
   })
 }
 
-const getDataHandler = (req, res) => {
-
+const userHandler = (req, res) => {
+  dbconnection.query(`Select * FROM users`, (err, data) => {
+    if (err) throw err;
+    else {
+      res.writeHead(200, { 'Content-Type' : 'application/json' });
+      res.end(JSON.stringify(data.rows));
+    }
+  });
 }
 
 
@@ -51,4 +58,4 @@ const badUrl = (req, res) => {
 }
 
 
-module.exports = { indexHandler, publicHandler, badUrl };
+module.exports = { indexHandler, publicHandler, badUrl, userHandler };
