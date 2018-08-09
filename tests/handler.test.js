@@ -3,7 +3,7 @@ const supertest = require('supertest');
 const router = require('../src/router');
 
 
-tape('test that tape is working',(t) => {
+tape('test that tape is working in handler test file',(t) => {
   t.equals("cat","cat","cat should equal cat");
   t.end();
 })
@@ -63,7 +63,25 @@ tape('test bad url returns 404', (t) => {
     .expect('Content-Type',/html/)
     .end(function(err, res) {
       if (err) throw err;
-      t.equals(res.statusCode, 404, "bad url should respond with code 404")
+      t.equals(res.statusCode, 404, "bad url should respond with code 404");
       t.end();
     });
 });    
+
+// Things to test
+// routes:
+  // test /users
+tape('user route returns data - JSON', (t) => {
+  supertest(router)
+    .get('/users')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(function(err, res) {
+      if (err) throw err;
+      t.equals(res.statusCode, 200, "users route returns status code 200");
+      t.end();
+    });
+});
+
+  // test /request route
+  // test /offers route

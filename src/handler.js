@@ -39,6 +39,12 @@ const publicHandler = (req, res) => {
   })
 }
 
+const getDataHandler = (req, res) => {
+
+}
+
+
+
 const badUrl = (req, res) => {
   res.writeHead(404,{ 'Content-Type' : 'text/html' });
   res.end('This is not the url you are looking 404');

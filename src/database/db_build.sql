@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS skills (
 
 INSERT INTO skills (skill) VALUES ('Friendship');
 INSERT INTO skills (skill) VALUES ('CSS');
-INSERT INTO skills (skill) VALUES ('Beer');
+INSERT INTO skills (skill) VALUES ('Drinking Beer');
 
 CREATE TABLE IF NOT EXISTS offers (
   id SERIAL PRIMARY KEY,
