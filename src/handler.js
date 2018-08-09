@@ -40,16 +40,25 @@ const publicHandler = (req, res) => {
   })
 }
 
+const requestQuery = `SELECT users.name, users.email, skill AS skill_requests FROM users INNER JOIN requests ON users.id = requests.user_id INNER JOIN skills ON requests.skill_id = skills.id;`;
+
+const offerQuery = `SELECT users.name, users.email, skill AS skill_offers FROM users INNER JOIN offers ON users.id = offers.user_id INNER JOIN
+skills ON offers.skill_id = skills.id;`;
+
 const userHandler = (req, res) => {
-  dbconnection.query(`Select * FROM users`, (err, data) => {
+  let result = {};
+  dbconnection.query(requestQuery, (err, requestData) => {
     if (err) throw err;
     else {
-      res.writeHead(200, { 'Content-Type' : 'application/json' });
-      res.end(JSON.stringify(data.rows));
+      result.requests = requestData.rows;
+      dbconnection.query(offerQuery, (err, offerData) => {
+        result.offers = offerData.rows;
+        res.writeHead(200, { 'Content-Type' : 'application/json' });
+        res.end(JSON.stringify(result));
+      });
     }
   });
 }
-
 
 
 const badUrl = (req, res) => {
