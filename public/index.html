@@ -6,26 +6,29 @@
   <title>JEAH DB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="public/main.css" />
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
 </head>
 <body>
   <h1>FaC Skillshare </h1>
   <form action="/submit" method="POST">
-    <input type="text" name="name" placeholder="Your Name">
-    <input type="email" name="email" placeholder="Your email">
+    <div id="container-form">
+    <input type="text" name="name" placeholder="Your Name" required autocomplete="off">
+    <input type="email" name="email" placeholder="Your email" required autocomplete="off">
     <input type="text" name="skill" placeholder="The Skill">
-    <br>
     <fieldset>
     <input type="radio" name="option" value="offer" id="offer"/>
     <label for="offer">I want to share</label>
-
     <input type="radio" name="option" value="request" id="request"/>
     <label for="request">I want to learn</label>
     </fieldset>
-    <br>
     <button type="submit" id="submit">Submit</button>
+    </div>
   </form>
-  <form action=""></form>
-  <div class="offers">
+  <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'Offers')">Offers</button>
+        <button class="tablinks" onclick="openTab(event, 'Requests')">Requests</button>
+    </div>
+  <div class="offers tabcontent" id="Offers">
       <table id="offers-table">
           <tr>
               <th>Name</th>
@@ -34,7 +37,7 @@
           </tr>
       </table>
   </div>
-  <div class="requests">
+  <div class="requests tabcontent"  id="Requests">
       <table id="requests-table">
           <tr>
               <th>Name</th>

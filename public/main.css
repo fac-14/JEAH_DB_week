@@ -1,23 +1,113 @@
-body{
-   background-color: aqua;
+* {
+    box-sizing: border-box;
+}
+
+body {
+   width: 60%;
+   margin: auto;
+   color: #004E89;
+   font-family: 'PT Sans', sans-serif;
 }
 
 h1{
     text-align: center;
+    color: #004E89;
+}
+
+/* Form styles */
+#container-form {
+    padding: 5%;
+    margin: auto;
+}
+
+fieldset {
+    border: none;
+    color:#ecf0f1;
 }
 
 form {
     text-align: center;
+    background: #1A659E;
+
 }
 
-.teachers {
-     min-width: 200px;
-     min-height: 200px;
-    background-color: brown;
+input[type=text],
+input[type=email] {
+    width: 100%;
+    border: none;
+    background: #ecf0f1;
+    line-height: 1rem;
+    padding: 5px;
+    margin: 5px;
+    
 }
 
-.learners {
-    min-width: 200px;
-    min-height: 200px;
-   background-color: lightgrey;
+form button {
+    background: #FF6B35;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+/* end of form styles */
+
+
+.offers {
+    background-color:#ecf0f1;
+    display: block;
+}
+
+.requests {
+   background-color:#ecf0f1;
+   display: none;
+}
+
+
+.tab {
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.tab button {
+    background-color: #ecf0f1;
+    border: 1px solid #ccc;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    padding: 6px 12px;
+    border-top: none;
+}
+
+.tablinks {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+/* table styles  */
+
+table {
+    width: 100%;
+    text-align: left;
+}
+
+th {
+
 }
