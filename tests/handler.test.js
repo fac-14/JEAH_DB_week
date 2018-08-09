@@ -1,9 +1,10 @@
 const tape = require('tape');
 const supertest = require('supertest');
 const router = require('../src/router');
+const runDbBuild = require('../src/database/db_build');
 
 
-tape('test that tape is working',(t) => {
+tape('test that tape is working in handler test file',(t) => {
   t.equals("cat","cat","cat should equal cat");
   t.end();
 })
@@ -63,7 +64,40 @@ tape('test bad url returns 404', (t) => {
     .expect('Content-Type',/html/)
     .end(function(err, res) {
       if (err) throw err;
-      t.equals(res.statusCode, 404, "bad url should respond with code 404")
+      t.equals(res.statusCode, 404, "bad url should respond with code 404");
       t.end();
     });
 });    
+
+  // test /users
+tape('user route returns data - JSON', (t) => {
+  supertest(router)
+    .get('/users')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end( (err, res) => {
+      if (err) throw err;
+      t.equals(res.statusCode, 200, "users route returns status code 200");
+      t.end();
+    });
+});
+
+  // test /submit
+tape('submit route returns 302 redirect', (t) => {
+  runDbBuild( (err, res) => {
+    if (err) {
+      throw err;
+    } else {
+      supertest(router)
+      .post('/submit')
+      .send('name=john&email=john@gmail.com&skill=CSS&option=offer')
+      .expect(302)
+      .end( (err, res) => {
+          if (err) throw (err);
+          t.equals(res.statusCode, 302, "/submit route returns redirect");
+          t.end();
+      });
+    }
+  })
+  
+})

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,15 +9,40 @@
 </head>
 <body>
   <h1>FaC Skillshare </h1>
-  <form action="">
-    <input type="text" placeholder="Your Name">
-    <input type="text" name="skill" id="" placeholder="Your Skills">
+  <form action="/submit" method="POST">
+    <input type="text" name="name" placeholder="Your Name">
+    <input type="email" name="email" placeholder="Your email">
+    <input type="text" name="skill" placeholder="The Skill">
     <br>
-    <input type="submit" value="I want to share">
-    <input type="submit" value="I want to learn">
+    <fieldset>
+    <input type="radio" name="option" value="offer" id="offer"/>
+    <label for="offer">I want to share</label>
+
+    <input type="radio" name="option" value="request" id="request"/>
+    <label for="request">I want to learn</label>
+    </fieldset>
+    <br>
+    <button type="submit" id="submit">Submit</button>
   </form>
-  <div class="learners"></div>
-  <div class="teachers"></div>
+  <form action=""></form>
+  <div class="offers">
+      <table id="offers-table">
+          <tr>
+              <th>Name</th>
+              <th>Skill</th>
+              <th>Contact Email</th>
+          </tr>
+      </table>
+  </div>
+  <div class="requests">
+      <table id="requests-table">
+          <tr>
+              <th>Name</th>
+              <th>Skill</th>
+              <th>Contact Email</th>
+          </tr>
+      </table>
+  </div>
   <script src="public/app.js"></script>
 </body>
 <!-- <link rel="stylesheet" href="main.css"> -->
