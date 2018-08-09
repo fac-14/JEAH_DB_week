@@ -1,5 +1,7 @@
-var learners = document.querySelector('.learners');
-var teachers = document.querySelector('.teachers');
+var requests = document.querySelector('.requests');
+var offers = document.querySelector('.offers');
+var offerTable = document.querySelector('#offers-table');
+var requestTable = document.querySelector('#requests-table');
 
 // Function to make XHR
 function request(type, url, cb) {
@@ -25,10 +27,37 @@ function renderCallback(err, data) {
   if (err) {
     console.log(err);
   } else {
-    console.log(data)
-    learners.append(data.requests);
-    teachers.append(data.offers);
+    var requestArray = data.requests;
+    var offerArray = data.offers;
+    renderRows(requestArray, requestTable);
+    renderRows(offerArray, offerTable);
   }
 } 
+
+function renderRows(array, table) {
+  array.forEach(element => {
+    var skill;
+    if (element.skill_offers) {
+      skill = element.skill_offers
+    } else {
+      skill = element.skill_requests
+    }
+    var row = document.createElement("tr");
+    // create name cell
+    var name = document.createElement("td");
+    name.textContent = element.name;
+    row.appendChild(name);
+    // create skill cell
+    var skillCell = document.createElement("td");
+    skillCell.textContent = skill;
+    row.appendChild(skillCell);
+    // create email cell
+    var email = document.createElement("td");
+    email.textContent = element.email;
+    row.appendChild(email);
+    // append row
+    table.appendChild(row);
+  });
+}
 
 request("GET", '/users', renderCallback);

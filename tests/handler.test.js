@@ -1,6 +1,7 @@
 const tape = require('tape');
 const supertest = require('supertest');
 const router = require('../src/router');
+const runDbBuild = require('../src/database/db_build');
 
 
 tape('test that tape is working in handler test file',(t) => {
@@ -83,13 +84,20 @@ tape('user route returns data - JSON', (t) => {
 
   // test /submit
 tape('submit route returns 302 redirect', (t) => {
-  supertest(router)
-    .post('/submit')
-    .send('name=john&skill=css&option=offer')
-    .expect(302)
-    .end( (err, res) => {
-        if (err) throw (err);
-        t.equals(res.statusCode, 302, "/submit route returns redirect");
-        t.end();
-    })
+  runDbBuild( (err, res) => {
+    if (err) {
+      throw err;
+    } else {
+      supertest(router)
+      .post('/submit')
+      .send('name=john&email=john@gmail.com&skill=CSS&option=offer')
+      .expect(302)
+      .end( (err, res) => {
+          if (err) throw (err);
+          t.equals(res.statusCode, 302, "/submit route returns redirect");
+          t.end();
+      });
+    }
+  })
+  
 })

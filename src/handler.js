@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const dbconnection = require('./database/db_connection'); // this is the pool
 const querystring = require('querystring');
-const { offerWrite, requestWrite } = require('./postQueries')
+const addToDatabase = require('./postQueries')
 
 const mimeTypes = {
   html: "text/html",
@@ -69,18 +69,11 @@ const postHandler = (req, res) => {
     });
     req.on('end', () => {
       const formData = querystring.parse(data);
-
-      if (formData.option == "offer") {
-        offerWrite(formData.name,formData.email,formData.skill);
-
-      } else if (formData.option == "request") {
-        requestWrite(formData.name,formData.email,formData.skill);
-
-      } else {
-        throw new Error('There was a problem with the form submission')
+      const callback = () => {
+        res.writeHead(302, {'Location' : '/'} );
+        res.end();
       }
-      res.writeHead(302, {'Location' : '/'} );
-      res.end();
+      addToDatabase(formData.name,formData.email,formData.skill,formData.option,callback);
     })
 }
 
