@@ -1,4 +1,4 @@
-const { indexHandler, publicHandler, badUrl, userHandler } = require('./handler.js');
+const { indexHandler, publicHandler, badUrl, userHandler, postHandler } = require('./handler.js');
 
 const router = (request, response) => {
   const endpoint = request.url;
@@ -9,10 +9,8 @@ const router = (request, response) => {
     publicHandler(request, response)
   } else if ( endpoint === "/users" ) {
     userHandler(request, response)
-  } else if ( endpoint === "/request" ) {
-    // requestHandler(request, response)
-  } else if ( endpoint === "/offer" ) {
-    // offerHandler(request, response)
+  } else if ( endpoint === "/submit" ) {
+    postHandler(request, response);
   } else {
     badUrl(request,response)
   }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="checkout.js"></script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>JEAH DB</title>
@@ -9,13 +10,22 @@
 </head>
 <body>
   <h1>FaC Skillshare </h1>
-  <form action="/submit" method="post">
-    <input type="text" placeholder="Your Name">
-    <input type="text" name="skill" id="" placeholder="Your Skills">
+  <form action="/submit" method="POST">
+    <input type="text" name="name" placeholder="Your Name">
+    <input type="email" name="email" placeholder="Your email">
+    <input type="text" name="skill" placeholder="The Skill">
     <br>
-    <input type="submit" value="I want to share">
-    <input type="submit" value="I want to learn">
+    <fieldset>
+    <input type="radio" name="option" value="offer" id="offer"/>
+    <label for="offer">I want to share</label>
+
+    <input type="radio" name="option" value="request" id="request"/>
+    <label for="request">I want to learn</label>
+    </fieldset>
+    <br>
+    <button type="submit" id="submit">Submit</button>
   </form>
+  <form action=""></form>
   <div class="learners"></div>
   <div class="teachers"></div>
   <script src="public/app.js"></script>

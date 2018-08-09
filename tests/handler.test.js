@@ -68,20 +68,28 @@ tape('test bad url returns 404', (t) => {
     });
 });    
 
-// Things to test
-// routes:
   // test /users
 tape('user route returns data - JSON', (t) => {
   supertest(router)
     .get('/users')
     .expect(200)
     .expect('Content-Type', /json/)
-    .end(function(err, res) {
+    .end( (err, res) => {
       if (err) throw err;
       t.equals(res.statusCode, 200, "users route returns status code 200");
       t.end();
     });
 });
 
-  // test /request route
-  // test /offers route
+  // test /submit
+tape('submit route returns 302 redirect', (t) => {
+  supertest(router)
+    .post('/submit')
+    .send('name=john&skill=css&option=offer')
+    .expect(302)
+    .end( (err, res) => {
+        if (err) throw (err);
+        t.equals(res.statusCode, 302, "/submit route returns redirect");
+        t.end();
+    })
+})

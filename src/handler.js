@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const dbconnection = require('./database/db_connection'); // this is the pool
+const querystring = require('querystring');
+const { offerWrite, requestWrite } = require('./postQueries')
 
 const mimeTypes = {
   html: "text/html",
@@ -60,11 +62,32 @@ const userHandler = (req, res) => {
   });
 }
 
+const postHandler = (req, res) => {
+    let data = "";
+    req.on('data',(chunk) => {
+      data += chunk;
+    });
+    req.on('end', () => {
+      const formData = querystring.parse(data);
+
+      if (formData.option == "offer") {
+        offerWrite(formData.name,formData.email,formData.skill);
+
+      } else if (formData.option == "request") {
+        requestWrite(formData.name,formData.email,formData.skill);
+
+      } else {
+        throw new Error('There was a problem with the form submission')
+      }
+      res.writeHead(302, {'Location' : '/'} );
+      res.end();
+    })
+}
+
 
 const badUrl = (req, res) => {
   res.writeHead(404,{ 'Content-Type' : 'text/html' });
   res.end('This is not the url you are looking 404');
 }
 
-
-module.exports = { indexHandler, publicHandler, badUrl, userHandler };
+module.exports = { indexHandler, publicHandler, badUrl, userHandler, postHandler };

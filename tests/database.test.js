@@ -8,9 +8,8 @@ tape("tape is working in database test file", t => {
 
 
 // database functions
-  // test getData
-  // test postRequest
-  // test postOffer  
+  // test offerWrite
+  // test requestWrite
 
 
 
