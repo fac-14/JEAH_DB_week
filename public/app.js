@@ -12,7 +12,7 @@ function request(type, url, cb) {
       if (cb) {
         cb(null, requestData);
       }
-    } else {
+    } else if (xhr.readyState === 4 && xhr.status !== 200) {
       if (cb) {
         cb("error" + xhr.responseType)
       }
