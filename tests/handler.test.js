@@ -82,7 +82,7 @@ tape('user route returns data - JSON', (t) => {
     });
 });
 
-  // test /submit
+  // test /submit offer
 tape('submit route returns 302 redirect', (t) => {
   runDbBuild( (err, res) => {
     if (err) {
@@ -91,6 +91,25 @@ tape('submit route returns 302 redirect', (t) => {
       supertest(router)
       .post('/submit')
       .send('name=john&email=john@gmail.com&skill=CSS&option=offer')
+      .expect(302)
+      .end( (err, res) => {
+          if (err) throw (err);
+          t.equals(res.statusCode, 302, "/submit route returns redirect");
+          t.end();
+      });
+    }
+  })
+  
+})
+
+tape('submit route returns 302 redirect', (t) => {
+  runDbBuild( (err, res) => {
+    if (err) {
+      throw err;
+    } else {
+      supertest(router)
+      .post('/submit')
+      .send('name=Ron&email=Ron@weasley.com&skill=magic&option=request')
       .expect(302)
       .end( (err, res) => {
           if (err) throw (err);

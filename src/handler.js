@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const dbconnection = require('./database/db_connection'); // this is the pool
 const querystring = require('querystring');
-const addToDatabase = require('./postQueries')
+const { addToDatabase } = require('./postQueries')
 
 const mimeTypes = {
   html: "text/html",
