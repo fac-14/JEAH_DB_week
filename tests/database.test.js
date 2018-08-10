@@ -1,6 +1,6 @@
 const tape = require('tape');
 const runDbBuild = require('../src/database/db_build');
-const { offerWrite, requestWrite } = require('../src/postQueries')
+const { addToDatabase, checkUsers, checkSkill, updateDB } = require('../src/postQueries')
 
 tape("tape is working in database test file", t => {
   t.equals(1, 1, "one equals one");
@@ -12,9 +12,11 @@ tape("tape is working in database test file", t => {
   // test offerWrite
   // test requestWrite
 
-    // tape('test offerWrite writes to database', (t)=> {
+    // tape('test updateDB with non-existent user throws error', (t)=> {
     //   runDbBuild( function(err, res) {
-    //    // your test goes here
+    //     updateDB('George','george@me.com','Jungle','request', () => {
+    //       t.throws(Error, /violates not-null constraint/, 'updateDB with not listed user should throw error' )
+    //     });
     //   })
     // })
 

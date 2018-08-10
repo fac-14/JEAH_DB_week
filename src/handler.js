@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const dbconnection = require('./database/db_connection'); // this is the pool
 const querystring = require('querystring');
-const addToDatabase = require('./postQueries')
+const { addToDatabase } = require('./postQueries');
+const getDatabase = require('./getQueries');
 
 const mimeTypes = {
   html: "text/html",
@@ -42,23 +42,10 @@ const publicHandler = (req, res) => {
   })
 }
 
-const requestQuery = `SELECT users.name, users.email, skill AS skill_requests FROM users INNER JOIN requests ON users.id = requests.user_id INNER JOIN skills ON requests.skill_id = skills.id;`;
-
-const offerQuery = `SELECT users.name, users.email, skill AS skill_offers FROM users INNER JOIN offers ON users.id = offers.user_id INNER JOIN
-skills ON offers.skill_id = skills.id;`;
-
-const userHandler = (req, res) => {
-  let result = {};
-  dbconnection.query(requestQuery, (err, requestData) => {
-    if (err) throw err;
-    else {
-      result.requests = requestData.rows;
-      dbconnection.query(offerQuery, (err, offerData) => {
-        result.offers = offerData.rows;
-        res.writeHead(200, { 'Content-Type' : 'application/json' });
-        res.end(JSON.stringify(result));
-      });
-    }
+const getDBHandler = (req, res) => {
+  getDatabase ( (result) => {
+    res.writeHead(200, { 'Content-Type' : 'application/json' });
+    res.end(JSON.stringify(result));
   });
 }
 
@@ -83,4 +70,4 @@ const badUrl = (req, res) => {
   res.end('This is not the url you are looking 404');
 }
 
-module.exports = { indexHandler, publicHandler, badUrl, userHandler, postHandler };
+module.exports = { indexHandler, publicHandler, badUrl, getDBHandler, postHandler };

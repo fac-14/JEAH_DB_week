@@ -52,7 +52,8 @@ const updateDB = (name,email,skill,option,callback,cb) => {
     dbconnection.query(query, (err, insertOffer) => {
       if (err) {
         console.log(err);
-        throw err;
+        throw new Error(err, 'the offer could not be added to offer table');
+        callback();
       } 
       else { 
         // console.log('offer added sucessfully');
@@ -70,7 +71,8 @@ const updateDB = (name,email,skill,option,callback,cb) => {
     dbconnection.query(query, (err, insertOffer) => {
       if (err) {
         console.log(err);
-        throw err;
+        throw new Error(err, 'the request could not be added to request table');
+        callback();
       } 
       else {
         // console.log('request added sucessfully');
@@ -91,4 +93,4 @@ const addToDatabase = (name,email,skill,option, callback) => {
   });
 };
 
-module.exports = addToDatabase;
+module.exports = { addToDatabase, checkUsers, checkSkill, updateDB };
