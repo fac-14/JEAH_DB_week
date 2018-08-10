@@ -2,26 +2,6 @@ var requests = document.querySelector('.requests');
 var offers = document.querySelector('.offers');
 var offerTable = document.querySelector('#offers-table');
 var requestTable = document.querySelector('#requests-table');
-var form = document.querySelector('form');
-var offerBtn = document.querySelector('.offerBtn');
-var requestBtn = document.querySelector('.requestBtn');
-
-if (document.cookie) {
-  if (document.cookie.split("=")[1] == "offer") {
-    offerBtn.classList.add("active");
-  } else {
-    requestBtn.classList.add("active");
-  }
-}
-
-form.addEventListener('submit', function(e) {
-  if (e.target[4].checked == true) {
-    document.cookie = "lastAdded=offer";
-  } else if (e.target[5].checked == true) {
-    document.cookie = "lastAdded=request";
-  }
-});
-
 
 // Function to make XHR
 function request(type, url, cb) {
@@ -32,7 +12,7 @@ function request(type, url, cb) {
       if (cb) {
         cb(null, requestData);
       }
-    } else if (xhr.readyState === 4 && xhr.status !== 200) {
+    } else {
       if (cb) {
         cb("error" + xhr.responseType)
       }
@@ -81,15 +61,22 @@ function renderRows(array, table) {
 }
 
 function openTab(evt, tabToOpen) {
-  var tabcontent, tablinks;
-  tabcontent = document.querySelectorAll(".tabcontent");
-  tabcontent.forEach( function(el) {
-    el.style.display = "none";
-  });
-  tablinks = document.querySelectorAll(".tablinks");
-  tablinks.forEach( function(el) {
-    el.className = el.className.replace(" active", "");
-  });
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(tabToOpen).style.display = "block";
   evt.currentTarget.className += " active";
 }

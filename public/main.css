@@ -62,7 +62,6 @@ form button {
    display: none;
 }
 
-/* tab styles */
 
 .tab {
     overflow: hidden;
@@ -71,26 +70,24 @@ form button {
 
 .tab button {
     background-color: #ccc;
+    
+    border: 1px solid #ccc;
     float: left;
-    border: 2px solid #ccc;
+    border: none;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
 }
 
+/* Change background color of buttons on hover */
 .tab button:hover {
     background-color: lightyellow;
 }
 
-/* Accessibility highlight */
-.tab button:focus {
-    border: 2px #004E89 solid !important;
-}
 
 .tab button.active {
     background-color: #ecf0f1;
-    border: 2px solid #ecf0f1;
 }
 
 /* Style the tab content */
@@ -108,25 +105,10 @@ form button {
 /* table styles  */
 
 table {
-    max-width: 100%;
+    width: 100%;
     text-align: left;
-    overflow: scroll;
 }
 
 th {
-    line-height: 1.5rem;
-}
 
-/* Media Queries  */
-
-@media (max-width: 900px) {
-    body {
-        width: 90%;
-    }
-
-    td:nth-child(3),
-    th:nth-child(3)
-    {
-        word-break: break-all;
-    }
 }

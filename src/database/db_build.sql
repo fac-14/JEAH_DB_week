@@ -8,20 +8,18 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(100) NOT NULL
 );
 
-INSERT INTO users (name, email) VALUES 
-('Jessie', 'jessie@jessiebeech.com'),
-('Harry', 'harry@gmail.com'), 
-('Armand', 'armand@hotmale.com');
+INSERT INTO users (name, email) VALUES ('Jessie', 'jessie@jessiebeech.com');
+INSERT INTO users (name, email) VALUES ('Harry', 'harry@gmail.com');
+INSERT INTO users (name, email) VALUES ('Armand', 'armand@hotmale.com');
 
 CREATE TABLE IF NOT EXISTS skills (
   id SERIAL PRIMARY KEY,
   skill VARCHAR(100) NOT NULL
 );
 
-INSERT INTO skills (skill) VALUES 
-('Friendship'), 
-('CSS'), 
-('Drinking Beer');
+INSERT INTO skills (skill) VALUES ('Friendship');
+INSERT INTO skills (skill) VALUES ('CSS');
+INSERT INTO skills (skill) VALUES ('Drinking Beer');
 
 CREATE TABLE IF NOT EXISTS offers (
   id SERIAL PRIMARY KEY,
@@ -29,9 +27,8 @@ CREATE TABLE IF NOT EXISTS offers (
   skill_id INTEGER NOT NULL
 );
 
-INSERT INTO offers (user_id, skill_id) VALUES 
-(1, 2), 
-(3, 1);
+INSERT INTO offers (user_id, skill_id) VALUES (1, 2);
+INSERT INTO offers (user_id, skill_id) VALUES (3, 1);
 
 
 CREATE TABLE IF NOT EXISTS requests (
@@ -40,8 +37,7 @@ CREATE TABLE IF NOT EXISTS requests (
   skill_id INTEGER NOT NULL
 );  
 
-INSERT INTO requests (user_id, skill_id) VALUES 
-(1, 1), 
-(2, 3);
+INSERT INTO requests (user_id, skill_id) VALUES (1, 1);
+INSERT INTO requests (user_id, skill_id) VALUES (2, 3);
 
 COMMIT;
