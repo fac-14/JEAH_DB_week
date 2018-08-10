@@ -1,4 +1,4 @@
-const { indexHandler, publicHandler, badUrl, getDBHandler, postHandler } = require('./handler.js');
+const { indexHandler, publicHandler, badUrl, userHandler, postHandler } = require('./handler.js');
 
 const router = (request, response) => {
   const endpoint = request.url;
@@ -8,7 +8,7 @@ const router = (request, response) => {
   } else if ( endpoint.includes("public") ){
     publicHandler(request, response)
   } else if ( endpoint === "/users" ) {
-    getDBHandler(request, response)
+    userHandler(request, response)
   } else if ( endpoint === "/submit" ) {
     postHandler(request, response);
   } else {
