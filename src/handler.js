@@ -55,6 +55,7 @@ const userHandler = (req, res) => {
       result.requests = requestData.rows;
       dbconnection.query(offerQuery, (err, offerData) => {
         result.offers = offerData.rows;
+        result.changed = "offer"
         res.writeHead(200, { 'Content-Type' : 'application/json' });
         res.end(JSON.stringify(result));
       });

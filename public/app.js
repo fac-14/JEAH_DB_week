@@ -2,6 +2,26 @@ var requests = document.querySelector('.requests');
 var offers = document.querySelector('.offers');
 var offerTable = document.querySelector('#offers-table');
 var requestTable = document.querySelector('#requests-table');
+var form = document.querySelector('form');
+var offerBtn = document.querySelector('.offerBtn');
+var requestBtn = document.querySelector('.requestBtn');
+
+if (document.cookie) {
+  if (document.cookie.split("=")[1] == "offer") {
+    offerBtn.classList.add("active");
+  } else {
+    requestBtn.classList.add("active");
+  }
+}
+
+form.addEventListener('submit', function(e) {
+  if (e.target[4].checked == true) {
+    document.cookie = "lastAdded=offer";
+  } else if (e.target[5].checked == true) {
+    document.cookie = "lastAdded=request";
+  }
+});
+
 
 // Function to make XHR
 function request(type, url, cb) {
